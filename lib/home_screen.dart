@@ -13,8 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>
-    with TickerProviderStateMixin,ImagePickerListener{
-
+    with TickerProviderStateMixin, ImagePickerListener {
   File _image;
   AnimationController _controller;
   ImagePickerHandler imagePicker;
@@ -27,9 +26,8 @@ class _HomeScreenState extends State<HomeScreen>
       duration: const Duration(milliseconds: 500),
     );
 
-    imagePicker=new ImagePickerHandler(this,_controller);
+    imagePicker = new ImagePickerHandler(this, _controller);
     imagePicker.init();
-
   }
 
   @override
@@ -38,16 +36,13 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(widget.title,
-        style: new TextStyle(
-          color: Colors.white
-        ),
+        title: new Text(
+          widget.title,
+          style: new TextStyle(color: Colors.white),
         ),
       ),
       body: new GestureDetector(
@@ -56,7 +51,6 @@ class _HomeScreenState extends State<HomeScreen>
           child: _image == null
               ? new Stack(
                   children: <Widget>[
-
                     new Center(
                       child: new CircleAvatar(
                         radius: 80.0,
@@ -66,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen>
                     new Center(
                       child: new Image.asset("assets/photo_camera.png"),
                     ),
-
                   ],
                 )
               : new Container(
@@ -74,19 +67,21 @@ class _HomeScreenState extends State<HomeScreen>
                   width: 160.0,
                   decoration: new BoxDecoration(
                     color: const Color(0xff7c94b6),
-                    image: new DecorationImage(
-                      image: new ExactAssetImage(_image.path),
-                      fit: BoxFit.cover,
-                    ),
-                    border:
-                        Border.all(color: Colors.red, width: 5.0),
+                    // image: new DecorationImage(
+                    //   image: new ExactAssetImage(_image.path),
+                    //   fit: BoxFit.cover,
+                    // ),
+                    border: Border.all(color: Colors.red, width: 5.0),
                     borderRadius:
                         new BorderRadius.all(const Radius.circular(80.0)),
+                  ),
+                  child: CircleAvatar(
+                    backgroundImage: new FileImage(_image),
+                    radius: 200.0,
                   ),
                 ),
         ),
       ),
-
     );
   }
 
@@ -96,5 +91,4 @@ class _HomeScreenState extends State<HomeScreen>
       this._image = _image;
     });
   }
-
 }
